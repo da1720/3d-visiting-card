@@ -167,7 +167,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         const userInfo = await userInfoRes.json();
 
         // Pass exact Google details to our Backend Database
-        const res = await fetch('http://localhost:3001/api/login', {
+        const res = await fetch('https://threed-visiting-card.onrender.com/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: userInfo.email, name: userInfo.name })

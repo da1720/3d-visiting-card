@@ -23,8 +23,8 @@ export function Dashboard({ userId, email, onOpenCard, onLogout }: TitleProps) {
     const fetchData = async () => {
         try {
             const [userRes, cardsRes] = await Promise.all([
-                fetch(`http://localhost:3001/api/users/${userId}`),
-                fetch(`http://localhost:3001/api/cards/${userId}`)
+                fetch(`https://threed-visiting-card.onrender.com/api/users/${userId}`),
+                fetch(`https://threed-visiting-card.onrender.com/api/cards/${userId}`)
             ]);
             const userData = await userRes.json();
             const cardsData = await cardsRes.json();
@@ -39,7 +39,7 @@ export function Dashboard({ userId, email, onOpenCard, onLogout }: TitleProps) {
 
     const handleUpdateName = async () => {
         try {
-            await fetch(`http://localhost:3001/api/users/${userId}`, {
+            await fetch(`https://threed-visiting-card.onrender.com/api/users/${userId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: userName })
@@ -53,7 +53,7 @@ export function Dashboard({ userId, email, onOpenCard, onLogout }: TitleProps) {
     const handleDeleteAccount = async () => {
         if (!window.confirm('Are you sure you want to permanently delete your account and all cards?')) return;
         try {
-            await fetch(`http://localhost:3001/api/users/${userId}`, { method: 'DELETE' });
+            await fetch(`https://threed-visiting-card.onrender.com/api/users/${userId}`, { method: 'DELETE' });
             onLogout();
         } catch (err) {
             console.error('Failed to delete account');
@@ -64,7 +64,7 @@ export function Dashboard({ userId, email, onOpenCard, onLogout }: TitleProps) {
         e.stopPropagation();
         if (!window.confirm('Delete this card?')) return;
         try {
-            await fetch(`http://localhost:3001/api/cards/${id}`, { method: 'DELETE' });
+            await fetch(`https://threed-visiting-card.onrender.com/api/cards/${id}`, { method: 'DELETE' });
             setCards(cards.filter(c => c.id !== id));
         } catch (err) {
             console.error('Failed to delete card');
@@ -75,7 +75,7 @@ export function Dashboard({ userId, email, onOpenCard, onLogout }: TitleProps) {
         e.preventDefault();
         if (!feedback) return;
         try {
-            await fetch(`http://localhost:3001/api/feedback`, {
+            await fetch(`https://threed-visiting-card.onrender.com/api/feedback`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, message: feedback })

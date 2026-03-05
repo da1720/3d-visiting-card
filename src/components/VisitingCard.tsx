@@ -125,7 +125,7 @@ class PhotoErrorBoundary extends Component<{ children: ReactNode }, { hasError: 
 }
 
 const UserPhoto: React.FC<{ url: string; size: number; posX: number; posY: number; shape: 'circle' | 'square' | 'rounded' }> = ({ url, size, posX, posY, shape }) => {
-  const proxyUrl = url.startsWith('http') ? `http://localhost:3001/api/proxy-image?url=${encodeURIComponent(url)}` : url;
+  const proxyUrl = url.startsWith('http') ? `https://threed-visiting-card.onrender.com/api/proxy-image?url=${encodeURIComponent(url)}` : url;
   const texture = useTexture(proxyUrl);
   return (
     <mesh position={[posX, posY, 0.05]}>
@@ -304,13 +304,13 @@ const Card: React.FC<CardProps> = ({ name, title, email, phone, website, locatio
           </Text>
 
           <group position={[textAlign === 'left' ? -1.5 : textAlign === 'right' ? 1.5 : 0, -0.1, 0]}>
-            <Text position={[0, 0, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl} onClick={() => window.open(`mailto:${email}`, '_blank')} className="cursor-pointer">
+            <Text position={[0, 0, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl} onClick={() => window.open(`mailto:${email}`, '_blank')} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'grab'}>
               {email}
             </Text>
-            <Text position={[0, -0.14, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl} onClick={() => window.open(`tel:${phone.replace(/[^0-9+]/g, '')}`, '_self')} className="cursor-pointer">
+            <Text position={[0, -0.14, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl} onClick={() => window.open(`tel:${phone.replace(/[^0-9+]/g, '')}`, '_self')} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'grab'}>
               {phone}
             </Text>
-            <Text position={[0, -0.28, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl} onClick={() => window.open(website.startsWith('http') ? website : `https://${website}`, '_blank')} className="cursor-pointer">
+            <Text position={[0, -0.28, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl} onClick={() => window.open(website.startsWith('http') ? website : `https://${website}`, '_blank')} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'grab'}>
               {website}
             </Text>
             <Text position={[0, -0.42, 0]} fontSize={0.08 * textScale} color={textColor} anchorX={textAlign} font={fontUrl}>
